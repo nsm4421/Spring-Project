@@ -3,10 +3,7 @@ package com.karma.board.controller.post
 import com.karma.board.domain.dto.request.post.CreatePostRequestDto
 import com.karma.board.domain.dto.request.post.ModifyPostRequestDto
 import com.karma.board.domain.dto.request.post.SearchPostRequestDto
-import com.karma.board.domain.dto.request.post.comment.CreatePostCommentRequestDto
-import com.karma.board.domain.dto.request.post.comment.ModifyPostCommentRequestDto
 import com.karma.board.domain.dto.response.post.PostResponseDto
-import com.karma.board.domain.dto.response.post.comment.PostCommentResponseDto
 import com.karma.board.service.post.PostService
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.Pageable
@@ -53,36 +50,5 @@ class PostController(
         @PathVariable postId: Long,
     ): Long {
         return postService.deletePost(postId = postId, deletedBy = username)
-    }
-
-    @GetMapping("/{postId}/comment")
-    fun getComments(
-        pageable: Pageable,
-        @PathVariable postId: Long,
-    ): Page<PostCommentResponseDto> {
-        return postService.getComments(pageable = pageable, postId = postId)
-    }
-
-    @PostMapping("/{postId}/comment")
-    fun createComment(
-        @PathVariable postId: Long,
-        @RequestBody req: CreatePostCommentRequestDto,
-    ): Long {
-        return postService.createComment(postId = postId, req = req, createdBy = username)
-    }
-
-    @PutMapping("/comment/{commentId}")
-    fun modifyComment(
-        @RequestBody req: ModifyPostCommentRequestDto,
-        @PathVariable commentId: Long,
-    ): Long {
-        return postService.modifyComment(commentId = commentId, req = req, modifiedBy = username)
-    }
-
-    @DeleteMapping("/comment/{commentId}")
-    fun deleteComment(
-        @PathVariable commentId: Long,
-    ): Long {
-        return postService.deleteComment(commentId = commentId, deletedBy = username)
     }
 }

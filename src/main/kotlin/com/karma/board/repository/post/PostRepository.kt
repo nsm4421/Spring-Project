@@ -1,4 +1,4 @@
-package com.karma.board.repository
+package com.karma.board.repository.post
 
 import com.karma.board.domain.dto.request.post.SearchPostRequestDto
 import com.karma.board.domain.entity.post.PostEntity
