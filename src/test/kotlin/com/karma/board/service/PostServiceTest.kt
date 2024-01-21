@@ -5,6 +5,7 @@ import com.karma.board.domain.dto.request.post.ModifyPostRequestDto
 import com.karma.board.domain.dto.request.post.SearchPostRequestDto
 import com.karma.board.domain.entity.post.PostEntity
 import com.karma.board.repository.PostRepository
+import com.karma.board.service.post.PostService
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.BehaviorSpec
 import io.kotest.matchers.comparables.shouldBeGreaterThan
@@ -44,9 +45,9 @@ class PostServiceTest(
             val postId = postService.createPost(
                 CreatePostRequestDto(
                     title = title,
-                    content = content,
-                    createdBy = createdBy
-                )
+                    content = content
+                ),
+                createdBy = createdBy
             )
             then("정상적으로 DB에 저장") {
                 postId shouldBeGreaterThan 0L
@@ -67,20 +68,20 @@ class PostServiceTest(
             var postId = postService.createPost(
                 CreatePostRequestDto(
                     title = title,
-                    content = content,
-                    createdBy = createdBy
-                )
+                    content = content
+                ),
+                createdBy = createdBy
             )
             title = "modified post"
             content = "modified post"
             postId = postService.modifyPost(
-                id = postId,
-                modifyPostRequestDto =
+                postId = postId,
+                req =
                 ModifyPostRequestDto(
                     title = title,
-                    content = content,
-                    modifiedBy = createdBy
-                )
+                    content = content
+                ),
+                modifiedBy = createdBy
             )
             then("포스트가 정상적으로 수정됨") {
                 postId shouldBeGreaterThan 0L
@@ -101,9 +102,9 @@ class PostServiceTest(
             val postId = postService.createPost(
                 CreatePostRequestDto(
                     title = title,
-                    content = content,
-                    createdBy = createdBy
-                )
+                    content = content
+                ),
+                createdBy = createdBy
             )
             title = "modified post content"
             content = "modified post content"
@@ -111,13 +112,13 @@ class PostServiceTest(
             then("EntityNotFoundException 오류 발생") {
                 shouldThrow<ValidationException> {
                     postService.modifyPost(
-                        id = postId,
-                        modifyPostRequestDto =
+                        postId = postId,
+                        req =
                         ModifyPostRequestDto(
                             title = title,
-                            content = content,
-                            modifiedBy = "not $createdBy"
-                        )
+                            content = content
+                        ),
+                        modifiedBy = "not $createdBy"
                     )
                 }
             }
@@ -132,7 +133,7 @@ class PostServiceTest(
 
             val pages = postService.searchPost(
                 PageRequest.of(pageNumber, pageSize),
-                searchPostRequestDto = SearchPostRequestDto(
+                req = SearchPostRequestDto(
                     title = null,
                     createdBy = null
                 )
@@ -156,7 +157,7 @@ class PostServiceTest(
 
             val pages = postService.searchPost(
                 PageRequest.of(pageNumber, pageSize),
-                searchPostRequestDto = SearchPostRequestDto(
+                req = SearchPostRequestDto(
                     title = searchKeyword,
                     createdBy = null
                 )
@@ -180,7 +181,7 @@ class PostServiceTest(
 
             val pages = postService.searchPost(
                 PageRequest.of(pageNumber, pageSize),
-                searchPostRequestDto = SearchPostRequestDto(
+                req = SearchPostRequestDto(
                     title = null,
                     createdBy = searchKeyword
                 )
