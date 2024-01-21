@@ -7,5 +7,4 @@ data class SearchPostRequestDto(
     val title: String?,
     @RequestParam
     val createdBy: String?,
-
 )

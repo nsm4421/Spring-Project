@@ -2,12 +2,15 @@ package com.karma.board.service
 
 import com.karma.board.domain.dto.request.post.CreatePostRequestDto
 import com.karma.board.domain.dto.request.post.ModifyPostRequestDto
+import com.karma.board.domain.dto.request.post.SearchPostRequestDto
 import com.karma.board.domain.dto.request.post.toEntity
 import com.karma.board.domain.dto.response.post.PostResponseDto
+import com.karma.board.domain.dto.response.post.toResponse
 import com.karma.board.domain.entity.post.PostEntity
 import com.karma.board.repository.PostRepository
 import jakarta.persistence.EntityNotFoundException
 import org.springframework.data.domain.Page
+import org.springframework.data.domain.Pageable
 import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
@@ -25,12 +28,12 @@ class PostService(
         return findPostByIdOrElseThrow(id).toResponse()
     }
 
-    // TODO : 검색기능구현하기
     @Transactional(readOnly = true)
     fun searchPost(
-        id: Long,
+        pageable: Pageable,
+        searchPostRequestDto: SearchPostRequestDto,
     ): Page<PostResponseDto> {
-        return Page.empty()
+        return postRepository.searchPost(pageable, searchPostRequestDto).toResponse()
     }
 
     fun createPost(

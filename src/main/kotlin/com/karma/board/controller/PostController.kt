@@ -22,7 +22,7 @@ class PostController(
         pageable: Pageable,
         searchPostRequestDto: SearchPostRequestDto,
     ): Page<PostResponseDto> {
-        return Page.empty()
+        return postService.searchPost(pageable, searchPostRequestDto)
     }
 
     @GetMapping("/{id}")
