@@ -1,0 +1,23 @@
+### Create Article
+POST http://localhost:8080/post
+Content-Type: application/json
+
+{
+    "title": "create post test",
+    "content": "content",
+    "createdBy": "karma"
+}
+
+### Modify Article
+PUT http://localhost:8080/post/1
+Content-Type: application/json
+
+{
+    "title": "modify post test",
+    "content": "modified content",
+    "modifiedBy": "karma"
+}
+
+### Delete Article
+DELETE http://localhost:8080/post/1
+Content-Type: application/json

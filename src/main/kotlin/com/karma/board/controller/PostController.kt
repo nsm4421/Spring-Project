@@ -7,14 +7,7 @@ import com.karma.board.domain.dto.response.post.PostResponseDto
 import com.karma.board.service.PostService
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.Pageable
-import org.springframework.web.bind.annotation.DeleteMapping
-import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.PathVariable
-import org.springframework.web.bind.annotation.PostMapping
-import org.springframework.web.bind.annotation.PutMapping
-import org.springframework.web.bind.annotation.RequestBody
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.bind.annotation.*
 
 // TODO : 인증기능 구현 후, 로그인한 유저의 id로 접근하도록 수정
 @RestController
@@ -24,7 +17,7 @@ class PostController(
 ) {
 
     // TODO : 검색기능 구현하기
-    @GetMapping("/")
+    @GetMapping
     fun searchPost(
         pageable: Pageable,
         searchPostRequestDto: SearchPostRequestDto,
@@ -37,7 +30,7 @@ class PostController(
         return postService.getPostById(id)
     }
 
-    @PostMapping("/")
+    @PostMapping
     fun createPost(
         @RequestBody createPostRequestDto: CreatePostRequestDto,
     ): Long {
