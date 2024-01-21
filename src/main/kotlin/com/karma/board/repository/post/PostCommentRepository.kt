@@ -1,4 +1,4 @@
-package com.karma.board.repository
+package com.karma.board.repository.post
 
 import com.karma.board.domain.entity.post.PostCommentEntity
 import com.karma.board.domain.entity.post.QPostCommentEntity.postCommentEntity

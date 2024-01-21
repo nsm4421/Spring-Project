@@ -4,7 +4,7 @@ import com.karma.board.domain.dto.request.post.CreatePostRequestDto
 import com.karma.board.domain.dto.request.post.ModifyPostRequestDto
 import com.karma.board.domain.dto.request.post.SearchPostRequestDto
 import com.karma.board.domain.entity.post.PostEntity
-import com.karma.board.repository.PostRepository
+import com.karma.board.repository.post.PostRepository
 import com.karma.board.service.post.PostService
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.BehaviorSpec
