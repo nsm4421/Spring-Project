@@ -35,6 +35,8 @@ dependencies {
     implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.1.0")
     implementation("com.querydsl:querydsl-jpa:5.0.0:jakarta")
     implementation("org.springframework.boot:spring-boot-starter-data-redis")
+    implementation("org.springframework.boot:spring-boot-starter-websocket")
+    implementation("io.github.oshai:kotlin-logging-jvm:5.1.0")
     kapt("com.querydsl:querydsl-apt:5.0.0:jakarta")
     runtimeOnly("com.mysql:mysql-connector-j")
     testImplementation("com.h2database:h2")
